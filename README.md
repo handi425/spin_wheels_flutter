@@ -124,19 +124,28 @@ Berikut beberapa tampilan dari aplikasi SpinWheels:
 
 <div align="center">
   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-    <img src="Screenshots/home_screen.png" alt="Halaman Utama" width="250" />
-    <img src="Screenshots/spin_wheel.png" alt="Roda Undian" width="250" />
-    <img src="Screenshots/prizes_list.png" alt="Daftar Hadiah" width="250" />
+    <img src="Screenshots/splash.png" alt="Splash" width="250" />
+    <img src="Screenshots/beranda.png" alt="Halaman Utama" width="250" />
+    <img src="Screenshots/pengguna.png" alt="Pengguna" width="250" />
+    <img src="Screenshots/tambah-pengguna.png" alt="Tambah Pengguna" width="250" />
   </div>
   
   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
-    <img src="Screenshots/user_profile.png" alt="Profil Pengguna" width="250" />
-    <img src="Screenshots/history.png" alt="Riwayat Undian" width="250" />
+    <img src="Screenshots/hadiah.png" alt="Hadiah" width="250" />
+    <img src="Screenshots/tambah-hadiah.png" alt="Tambah Hadiah" width="250" />
+    <img src="Screenshots/statistik.png" alt="Statistik" width="250" />
     <img src="Screenshots/settings.png" alt="Pengaturan" width="250" />
   </div>
 </div>
 
-> Catatan: Screenshot di atas hanya ilustrasi. Tampilan aktual dapat berbeda tergantung pada versi aplikasi.
+<!-- 
+Catatan untuk pengembang:
+1. Pastikan folder Screenshots berada di root project
+2. Ganti nama file screenshot_X.png dengan nama file yang sebenarnya di folder Screenshots
+3. Tambahkan screenshot baru sesuai kebutuhan
+-->
+
+> Catatan: Screenshot di atas menunjukkan tampilan aktual aplikasi. Tampilan dapat berbeda tergantung pada versi dan perangkat yang digunakan.
 
 ## 📄 Model Data
 
