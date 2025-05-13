@@ -1,3 +1,34 @@
+
+## 📸 Screenshot Aplikasi
+
+Berikut beberapa tampilan dari aplikasi SpinWheels:
+
+<div align="center">
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+    <img src="Screenshots/splash.png" alt="Splash" width="200" />
+    <img src="Screenshots/beranda.png" alt="Halaman Utama" width="200" />
+    <img src="Screenshots/pengguna.png" alt="Pengguna" width="200" />
+    <img src="Screenshots/tambah-pengguna.png" alt="Tambah Pengguna" width="200" />
+  </div>
+  
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
+    <img src="Screenshots/hadiah.png" alt="Hadiah" width="200" />
+    <img src="Screenshots/tambah-hadiah.png" alt="Tambah Hadiah" width="200" />
+    <img src="Screenshots/statistik.png" alt="Statistik" width="200" />
+    <img src="Screenshots/settings.png" alt="Pengaturan" width="200" />
+  </div>
+</div>
+
+<!-- 
+Catatan untuk pengembang:
+1. Pastikan folder Screenshots berada di root project
+2. Ganti nama file screenshot_X.png dengan nama file yang sebenarnya di folder Screenshots
+3. Tambahkan screenshot baru sesuai kebutuhan
+-->
+
+> Catatan: Screenshot di atas menunjukkan tampilan aktual aplikasi. Tampilan dapat berbeda tergantung pada versi dan perangkat yang digunakan.
+
+
 # SpinWheels 🎡
 
 Aplikasi undian berputar (spin wheel) yang dibuat dengan Flutter.
@@ -117,35 +148,6 @@ flutter build ios --release
 - Dukungan tema terang dan gelap
 - Beralih tema secara otomatis mengikuti sistem
 - Kustomisasi warna utama
-
-## 📸 Screenshot Aplikasi
-
-Berikut beberapa tampilan dari aplikasi SpinWheels:
-
-<div align="center">
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-    <img src="Screenshots/splash.png" alt="Splash" width="200" />
-    <img src="Screenshots/beranda.png" alt="Halaman Utama" width="200" />
-    <img src="Screenshots/pengguna.png" alt="Pengguna" width="200" />
-    <img src="Screenshots/tambah-pengguna.png" alt="Tambah Pengguna" width="200" />
-  </div>
-  
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
-    <img src="Screenshots/hadiah.png" alt="Hadiah" width="200" />
-    <img src="Screenshots/tambah-hadiah.png" alt="Tambah Hadiah" width="200" />
-    <img src="Screenshots/statistik.png" alt="Statistik" width="200" />
-    <img src="Screenshots/settings.png" alt="Pengaturan" width="200" />
-  </div>
-</div>
-
-<!-- 
-Catatan untuk pengembang:
-1. Pastikan folder Screenshots berada di root project
-2. Ganti nama file screenshot_X.png dengan nama file yang sebenarnya di folder Screenshots
-3. Tambahkan screenshot baru sesuai kebutuhan
--->
-
-> Catatan: Screenshot di atas menunjukkan tampilan aktual aplikasi. Tampilan dapat berbeda tergantung pada versi dan perangkat yang digunakan.
 
 ## 📄 Model Data
 
