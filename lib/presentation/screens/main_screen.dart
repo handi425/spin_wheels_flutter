@@ -37,22 +37,13 @@ class _MainScreenState extends State<MainScreen> {
 
   // Daftar item navigasi
   final List<NavigationDestination> _navigationItems = [
-    const NavigationDestination(
-      icon: Icon(Icons.home),
-      label: 'Beranda',
-    ),
-    const NavigationDestination(
-      icon: Icon(Icons.people),
-      label: 'Pengguna',
-    ),
+    const NavigationDestination(icon: Icon(Icons.home), label: 'Beranda'),
+    const NavigationDestination(icon: Icon(Icons.people), label: 'Pengguna'),
     const NavigationDestination(
       icon: Icon(Icons.card_giftcard),
       label: 'Hadiah',
     ),
-    const NavigationDestination(
-      icon: Icon(Icons.history),
-      label: 'Riwayat',
-    ),
+    const NavigationDestination(icon: Icon(Icons.history), label: 'Riwayat'),
     const NavigationDestination(
       icon: Icon(Icons.bar_chart),
       label: 'Statistik',
@@ -66,9 +57,11 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    
-    // Memuat data dari database
-    _loadData();
+
+    // Memuat data dari database setelah frame pertama selesai dibangun
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadData();
+    });
   }
 
   @override
@@ -88,7 +81,10 @@ class _MainScreenState extends State<MainScreen> {
     await prizeProvider.loadPrizes();
 
     // Memuat data riwayat spin
-    final spinHistoryProvider = Provider.of<SpinHistoryProvider>(context, listen: false);
+    final spinHistoryProvider = Provider.of<SpinHistoryProvider>(
+      context,
+      listen: false,
+    );
     await spinHistoryProvider.loadSpinHistories();
     await spinHistoryProvider.loadStatistics();
   }
@@ -98,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-    
+
     // Pindah ke halaman yang dipilih
     _pageController.animateToPage(
       index,

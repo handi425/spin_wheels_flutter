@@ -23,10 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SpinWheels'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('SpinWheels'), centerTitle: true),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -48,9 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<UserProvider>(
       builder: (context, userProvider, child) {
         if (userProvider.isLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (userProvider.users.isEmpty) {
@@ -59,35 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  const Icon(
-                    Icons.people,
-                    size: 48,
-                    color: Colors.grey,
-                  ),
+                  const Icon(Icons.people, size: 48, color: Colors.grey),
                   const SizedBox(height: 16),
                   const Text(
                     'Belum ada pengguna',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Tambahkan pengguna terlebih dahulu untuk memulai',
+                    'Tambahkan pengguna terlebih dahulu untuk memulai, di menu Pengguna',
                     textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      // Navigasi ke halaman Pengguna
-                      final NavigationBar navigationBar = context
-                          .findAncestorWidgetOfExactType<NavigationBar>()!;
-                      navigationBar
-                          .onDestinationSelected!(1); // Index halaman Pengguna
-                    },
-                    icon: const Icon(Icons.add),
-                    label: const Text('Tambah Pengguna'),
                   ),
                 ],
               ),
@@ -107,10 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const Text(
                   'Pilih Pengguna',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<User>(
@@ -120,12 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     prefixIcon: Icon(Icons.person),
                     border: OutlineInputBorder(),
                   ),
-                  items: userProvider.users.map((user) {
-                    return DropdownMenuItem<User>(
-                      value: user,
-                      child: Text(user.name),
-                    );
-                  }).toList(),
+                  items:
+                      userProvider.users.map((user) {
+                        return DropdownMenuItem<User>(
+                          value: user,
+                          child: Text(user.name),
+                        );
+                      }).toList(),
                   onChanged: (User? value) {
                     setState(() {
                       _selectedUser = value;
@@ -146,9 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Consumer2<PrizeProvider, UserProvider>(
         builder: (context, prizeProvider, userProvider, child) {
           if (prizeProvider.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           final availablePrizes = prizeProvider.availablePrizes;
@@ -175,20 +147,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Tambahkan hadiah terlebih dahulu untuk memulai',
+                      'Tambahkan hadiah terlebih dahulu untuk memulai, di menu Hadiah',
                       textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        // Navigasi ke halaman Hadiah
-                        final NavigationBar navigationBar = context
-                            .findAncestorWidgetOfExactType<NavigationBar>()!;
-                        navigationBar
-                            .onDestinationSelected!(2); // Index halaman Hadiah
-                      },
-                      icon: const Icon(Icons.add),
-                      label: const Text('Tambah Hadiah'),
                     ),
                   ],
                 ),
@@ -246,9 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 8),
                   const Text(
                     'Putar roda untuk mendapatkan hadiah',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                    style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 16),
                   Expanded(
@@ -277,20 +235,21 @@ class _HomeScreenState extends State<HomeScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => SpinResultWidget(
-        prize: prize,
-        user: _selectedUser!,
-        onClose: () {
-          Navigator.pop(context);
-          setState(() {
-            _selectedPrize = null;
-          });
-        },
-        onSpinAgain: () {
-          // Tidak melakukan apa-apa, karena dialog sudah ditutup
-          // dan pengguna bisa memutar lagi
-        },
-      ),
+      builder:
+          (context) => SpinResultWidget(
+            prize: prize,
+            user: _selectedUser!,
+            onClose: () {
+              Navigator.pop(context);
+              setState(() {
+                _selectedPrize = null;
+              });
+            },
+            onSpinAgain: () {
+              // Tidak melakukan apa-apa, karena dialog sudah ditutup
+              // dan pengguna bisa memutar lagi
+            },
+          ),
     );
   }
 }
