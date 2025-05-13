@@ -138,8 +138,6 @@ Proyek ini dilisensikan di bawah [Lisensi MIT](LICENSE)
 
 ## 👥 Tim Pengembang
 
-## 👥 Tim Pengembang
-
 - [Tazkan Games](https://tazkan.com/)
 
 ---
