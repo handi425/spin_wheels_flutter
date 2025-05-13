@@ -45,6 +45,7 @@ class DatabaseHelper {
         ${DatabaseConstants.colUserPhone} TEXT,
         ${DatabaseConstants.colUserAddress} TEXT,
         ${DatabaseConstants.colUserInvoice} TEXT,
+        ${DatabaseConstants.colUserTrackingNumber} TEXT,
         ${DatabaseConstants.colCreatedAt} TEXT NOT NULL,
         ${DatabaseConstants.colUpdatedAt} TEXT NOT NULL
       )

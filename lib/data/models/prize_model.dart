@@ -10,7 +10,6 @@ class Prize {
   final Color color;
   final double? probability;
   final int availableCount;
-  final String? imagePath;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -22,7 +21,6 @@ class Prize {
     required this.color,
     this.probability,
     required this.availableCount,
-    this.imagePath,
     DateTime? createdAt,
     DateTime? updatedAt,
   })  : createdAt = createdAt ?? DateTime.now(),
@@ -38,7 +36,6 @@ class Prize {
       color: Color(int.parse(map[DatabaseConstants.colPrizeColor])),
       probability: map[DatabaseConstants.colPrizeProbability],
       availableCount: map[DatabaseConstants.colPrizeAvailableCount],
-      imagePath: map[DatabaseConstants.colPrizeImagePath],
       createdAt: DateTime.parse(map[DatabaseConstants.colCreatedAt]),
       updatedAt: DateTime.parse(map[DatabaseConstants.colUpdatedAt]),
     );
@@ -53,7 +50,6 @@ class Prize {
       DatabaseConstants.colPrizeColor: color.value.toString(),
       DatabaseConstants.colPrizeProbability: probability,
       DatabaseConstants.colPrizeAvailableCount: availableCount,
-      DatabaseConstants.colPrizeImagePath: imagePath,
       DatabaseConstants.colCreatedAt: createdAt.toIso8601String(),
       DatabaseConstants.colUpdatedAt: updatedAt.toIso8601String(),
     };
@@ -86,7 +82,6 @@ class Prize {
       color: color ?? this.color,
       probability: probability ?? this.probability,
       availableCount: availableCount ?? this.availableCount,
-      imagePath: imagePath ?? this.imagePath,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? DateTime.now(),
     );

@@ -51,6 +51,7 @@ class DatabaseConstants {
   static const String colUserPhone = 'phone';
   static const String colUserAddress = 'address';
   static const String colUserInvoice = 'invoice';
+  static const String colUserTrackingNumber = 'tracking_number';
 
   // Kolom tabel prizes
   static const String colPrizeName = 'name';
@@ -67,6 +68,7 @@ class DatabaseConstants {
   static const String colSpinHistoryIsSent = 'is_sent';
   static const String colSpinHistorySentAt = 'sent_at';
   static const String colSpinHistoryNotes = 'notes';
+  static const String colSpinHistoryTrackingNumber = 'tracking_number';
 }
 
 /// Theme data untuk aplikasi

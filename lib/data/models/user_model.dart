@@ -8,6 +8,7 @@ class User {
   final String? phone;
   final String? address;
   final String? invoice;
+  final String? trackingNumber;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -18,6 +19,7 @@ class User {
     this.phone,
     this.address,
     this.invoice,
+    this.trackingNumber,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) : createdAt = createdAt ?? DateTime.now(),
@@ -32,6 +34,7 @@ class User {
       phone: map[DatabaseConstants.colUserPhone],
       address: map[DatabaseConstants.colUserAddress],
       invoice: map[DatabaseConstants.colUserInvoice],
+      trackingNumber: map[DatabaseConstants.colUserTrackingNumber],
       createdAt: DateTime.parse(map[DatabaseConstants.colCreatedAt]),
       updatedAt: DateTime.parse(map[DatabaseConstants.colUpdatedAt]),
     );
@@ -45,6 +48,7 @@ class User {
       DatabaseConstants.colUserPhone: phone,
       DatabaseConstants.colUserAddress: address,
       DatabaseConstants.colUserInvoice: invoice,
+      DatabaseConstants.colUserTrackingNumber: trackingNumber,
       DatabaseConstants.colCreatedAt: createdAt.toIso8601String(),
       DatabaseConstants.colUpdatedAt: updatedAt.toIso8601String(),
     };
@@ -64,6 +68,7 @@ class User {
     String? phone,
     String? address,
     String? invoice,
+    String? trackingNumber,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -74,6 +79,7 @@ class User {
       phone: phone ?? this.phone,
       address: address ?? this.address,
       invoice: invoice ?? this.invoice,
+      trackingNumber: trackingNumber ?? this.trackingNumber,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? DateTime.now(),
     );
@@ -81,6 +87,6 @@ class User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phone: $phone, address: $address, invoice: $invoice)';
+    return 'User(id: $id, name: $name, email: $email, phone: $phone, address: $address, invoice: $invoice, trackingNumber: $trackingNumber)';
   }
 }

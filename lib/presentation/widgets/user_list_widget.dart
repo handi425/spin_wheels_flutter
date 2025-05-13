@@ -71,6 +71,20 @@ class UserListWidget extends StatelessWidget {
                     icon: Icons.delete,
                     label: 'Hapus',
                   ),
+                  SlidableAction(
+                    onPressed: (context) => _showShippingDialog(context, user),
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
+                    icon: Icons.local_shipping,
+                    label: 'Resi',
+                  ),
+                  SlidableAction(
+                    onPressed: (context) => _showShippingDialog(context, user),
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
+                    icon: Icons.local_shipping,
+                    label: 'Resi',
+                  ),
                 ],
               ),
               child: ListTile(
@@ -92,6 +106,8 @@ class UserListWidget extends StatelessWidget {
                     if (user.phone != null) Text("Telp: ${user.phone!}"),
                     if (user.address != null) Text("Alamat: ${user.address!}"),
                     if (user.invoice != null) Text("Invoice: ${user.invoice!}"),
+                    if (user.trackingNumber != null)
+                      Text("No. Resi: ${user.trackingNumber!}"),
                   ],
                 ),
                 isThreeLine: true,
@@ -165,5 +181,93 @@ class UserListWidget extends StatelessWidget {
   // Menampilkan dialog edit pengguna
   void _showEditUserDialog(BuildContext context, User user) {
     showAddEditUserDialog(context: context, user: user);
+  }
+
+  // Menampilkan dialog form resi pengiriman
+  void _showShippingDialog(BuildContext context, User user) {
+    final TextEditingController trackingNumberController =
+        TextEditingController(text: user.trackingNumber);
+
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Input Resi Pengiriman'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Pengguna: ${user.name}',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: trackingNumberController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nomor Resi',
+                    prefixIcon: Icon(Icons.local_shipping),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Batal'),
+              ),
+              if (user.phone != null)
+                TextButton(
+                  onPressed: () {
+                    final message =
+                        'Halo ${user.name}, berikut nomor resi pengiriman hadiah Anda: ${trackingNumberController.text}';
+                    Utils.openWhatsapp(phone: user.phone!, message: message);
+                  },
+                  child: const Text(
+                    'Kirim WhatsApp',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+
+                  // Update user dengan resi baru
+                  final userProvider = Provider.of<UserProvider>(
+                    context,
+                    listen: false,
+                  );
+                  final updatedUser = user.copyWith(
+                    trackingNumber:
+                        trackingNumberController.text.isEmpty
+                            ? null
+                            : trackingNumberController.text,
+                  );
+
+                  userProvider.saveUser(updatedUser).then((success) {
+                    if (success) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Resi berhasil disimpan'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            userProvider.error ?? 'Gagal menyimpan resi',
+                          ),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                  });
+                },
+                child: const Text('Simpan'),
+              ),
+            ],
+          ),
+    );
   }
 }

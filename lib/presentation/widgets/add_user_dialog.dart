@@ -22,6 +22,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
   late final TextEditingController phoneController;
   late final TextEditingController addressController;
   late final TextEditingController invoiceController;
+  late final TextEditingController trackingNumberController;
 
   bool get isEditing => widget.user != null;
 
@@ -29,12 +30,15 @@ class _AddUserDialogState extends State<AddUserDialog> {
   void initState() {
     super.initState();
 
-    // Inisialisasi controller dengan data user jika mode edit
+    // Inisialisasi controller dengan data user jika mode edit    
     nameController = TextEditingController(text: widget.user?.name ?? '');
     emailController = TextEditingController(text: widget.user?.email ?? '');
     phoneController = TextEditingController(text: widget.user?.phone ?? '');
     addressController = TextEditingController(text: widget.user?.address ?? '');
     invoiceController = TextEditingController(text: widget.user?.invoice ?? '');
+    trackingNumberController = TextEditingController(
+      text: widget.user?.trackingNumber ?? '',
+    );
   }
 
   @override
@@ -44,6 +48,7 @@ class _AddUserDialogState extends State<AddUserDialog> {
     phoneController.dispose();
     addressController.dispose();
     invoiceController.dispose();
+    trackingNumberController.dispose();
     super.dispose();
   }
 
@@ -130,6 +135,16 @@ class _AddUserDialogState extends State<AddUserDialog> {
                   ),
                   keyboardType: TextInputType.text,
                 ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: trackingNumberController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nomor Resi Pengiriman',
+                    prefixIcon: Icon(Icons.local_shipping),
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.text,
+                ),
               ],
             ),
           ),
@@ -148,9 +163,10 @@ class _AddUserDialogState extends State<AddUserDialog> {
   /// Menyimpan data pengguna ke database
   void _saveUser() {
     if (formKey.currentState!.validate()) {
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
-
-      // Buat pengguna baru atau update yang sudah ada
+      final userProvider = Provider.of<UserProvider>(
+        context,
+        listen: false,
+      ); // Buat pengguna baru atau update yang sudah ada
       final user =
           isEditing
               ? widget.user!.copyWith(
@@ -167,6 +183,10 @@ class _AddUserDialogState extends State<AddUserDialog> {
                     invoiceController.text.isEmpty
                         ? null
                         : invoiceController.text,
+                trackingNumber:
+                    trackingNumberController.text.isEmpty
+                        ? null
+                        : trackingNumberController.text,
               )
               : User(
                 name: nameController.text,
@@ -182,6 +202,10 @@ class _AddUserDialogState extends State<AddUserDialog> {
                     invoiceController.text.isEmpty
                         ? null
                         : invoiceController.text,
+                trackingNumber:
+                    trackingNumberController.text.isEmpty
+                        ? null
+                        : trackingNumberController.text,
               );
 
       // Simpan pengguna

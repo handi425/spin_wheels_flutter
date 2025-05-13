@@ -8,8 +8,9 @@ class SpinHistory {
   final bool isSent;
   final DateTime? sentAt;
   final String? notes;
+  final String? trackingNumber; // Nomor resi pengiriman
   final DateTime createdAt;
-  
+
   // Data relasi (lazy loading)
   Map<String, dynamic>? _userData;
   Map<String, dynamic>? _prizeData;
@@ -21,12 +22,13 @@ class SpinHistory {
     this.isSent = false,
     this.sentAt,
     this.notes,
+    this.trackingNumber,
     DateTime? createdAt,
     Map<String, dynamic>? userData,
     Map<String, dynamic>? prizeData,
-  })  : createdAt = createdAt ?? DateTime.now(),
-        _userData = userData,
-        _prizeData = prizeData;
+  }) : createdAt = createdAt ?? DateTime.now(),
+       _userData = userData,
+       _prizeData = prizeData;
 
   /// Membuat SpinHistory dari Map (dari database)
   factory SpinHistory.fromMap(Map<String, dynamic> map) {
@@ -35,21 +37,29 @@ class SpinHistory {
       userId: map[DatabaseConstants.colSpinHistoryUserId],
       prizeId: map[DatabaseConstants.colSpinHistoryPrizeId],
       isSent: map[DatabaseConstants.colSpinHistoryIsSent] == 1,
-      sentAt: map[DatabaseConstants.colSpinHistorySentAt] != null
-          ? DateTime.parse(map[DatabaseConstants.colSpinHistorySentAt])
-          : null,
+      sentAt:
+          map[DatabaseConstants.colSpinHistorySentAt] != null
+              ? DateTime.parse(map[DatabaseConstants.colSpinHistorySentAt])
+              : null,
       notes: map[DatabaseConstants.colSpinHistoryNotes],
+      trackingNumber: map[DatabaseConstants.colSpinHistoryTrackingNumber],
       createdAt: DateTime.parse(map[DatabaseConstants.colCreatedAt]),
-      userData: map.containsKey('user_name') ? {
-        'id': map['user_id'],
-        'name': map['user_name'],
-        'email': map['user_email'],
-      } : null,
-      prizeData: map.containsKey('prize_name') ? {
-        'id': map['prize_id'],
-        'name': map['prize_name'],
-        'value': map['prize_value'],
-      } : null,
+      userData:
+          map.containsKey('user_name')
+              ? {
+                'id': map['user_id'],
+                'name': map['user_name'],
+                'email': map['user_email'],
+              }
+              : null,
+      prizeData:
+          map.containsKey('prize_name')
+              ? {
+                'id': map['prize_id'],
+                'name': map['prize_name'],
+                'value': map['prize_value'],
+              }
+              : null,
     );
   }
 
@@ -61,6 +71,7 @@ class SpinHistory {
       DatabaseConstants.colSpinHistoryIsSent: isSent ? 1 : 0,
       DatabaseConstants.colSpinHistorySentAt: sentAt?.toIso8601String(),
       DatabaseConstants.colSpinHistoryNotes: notes,
+      DatabaseConstants.colSpinHistoryTrackingNumber: trackingNumber,
       DatabaseConstants.colCreatedAt: createdAt.toIso8601String(),
     };
 
@@ -95,6 +106,7 @@ class SpinHistory {
     bool? isSent,
     DateTime? sentAt,
     String? notes,
+    String? trackingNumber,
     DateTime? createdAt,
     Map<String, dynamic>? userData,
     Map<String, dynamic>? prizeData,
@@ -106,6 +118,7 @@ class SpinHistory {
       isSent: isSent ?? this.isSent,
       sentAt: sentAt ?? this.sentAt,
       notes: notes ?? this.notes,
+      trackingNumber: trackingNumber ?? this.trackingNumber,
       createdAt: createdAt ?? this.createdAt,
       userData: userData ?? _userData,
       prizeData: prizeData ?? _prizeData,

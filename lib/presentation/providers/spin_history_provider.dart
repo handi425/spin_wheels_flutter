@@ -5,7 +5,7 @@ import 'package:spin_wheels/domain/repositories/spin_history_repository.dart';
 /// Provider untuk mengelola state terkait SpinHistory
 class SpinHistoryProvider extends ChangeNotifier {
   final SpinHistoryRepository _spinHistoryRepository = SpinHistoryRepository();
-  
+
   List<SpinHistory> _spinHistories = [];
   Map<String, dynamic> _statistics = {};
   bool _isLoading = false;
@@ -13,16 +13,16 @@ class SpinHistoryProvider extends ChangeNotifier {
 
   /// Getter untuk mendapatkan daftar riwayat spin
   List<SpinHistory> get spinHistories => _spinHistories;
-  
+
   /// Getter untuk mendapatkan statistik
   Map<String, dynamic> get statistics => _statistics;
-  
+
   /// Getter untuk mendapatkan status loading
   bool get isLoading => _isLoading;
-  
+
   /// Getter untuk mendapatkan error
   String? get error => _error;
-  
+
   /// Getter untuk mendapatkan jumlah hadiah yang belum terkirim
   int get unsentCount => _statistics['unsentCount'] ?? 0;
 
@@ -43,7 +43,9 @@ class SpinHistoryProvider extends ChangeNotifier {
   Future<void> loadSpinHistoriesByUserId(int userId) async {
     _setLoading(true);
     try {
-      _spinHistories = await _spinHistoryRepository.getSpinHistoriesByUserId(userId);
+      _spinHistories = await _spinHistoryRepository.getSpinHistoriesByUserId(
+        userId,
+      );
       _error = null;
     } catch (e) {
       _error = 'Gagal memuat riwayat spin: ${e.toString()}';
@@ -73,10 +75,18 @@ class SpinHistoryProvider extends ChangeNotifier {
   }
 
   /// Menandai riwayat spin sebagai terkirim
-  Future<bool> markAsSent(int spinHistoryId, {String? notes}) async {
+  Future<bool> markAsSent(
+    int spinHistoryId, {
+    String? notes,
+    String? trackingNumber,
+  }) async {
     _setLoading(true);
     try {
-      final result = await _spinHistoryRepository.markAsSent(spinHistoryId, notes: notes);
+      final result = await _spinHistoryRepository.markAsSent(
+        spinHistoryId,
+        notes: notes,
+        trackingNumber: trackingNumber,
+      );
       if (result > 0) {
         await loadSpinHistories();
         await loadStatistics();
