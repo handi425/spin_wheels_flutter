@@ -55,7 +55,7 @@ lib/
 
 1. Clone repositori ini
 ```powershell
-git clone [https://github.com/handi425/spin_wheels_flutter.git]
+git clone https://github.com/handi425/spin_wheels_flutter.git
 ```
 
 2. Masuk ke direktori proyek
