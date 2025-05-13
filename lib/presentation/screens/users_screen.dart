@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:spin_wheels/presentation/providers/user_provider.dart';
+import 'package:spin_wheels/presentation/widgets/add_user_dialog.dart';
 import 'package:spin_wheels/presentation/widgets/user_list_widget.dart';
-
-import '../../data/models/user_model.dart';
 
 /// Layar pengguna
 class UsersScreen extends StatefulWidget {
@@ -90,159 +89,10 @@ class _UsersScreenState extends State<UsersScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddUserDialog(context),
+        onPressed: () => showAddEditUserDialog(context: context),
         tooltip: 'Tambah Pengguna',
         child: const Icon(Icons.add),
       ),
     );
   }
-
-  // Menampilkan dialog tambah pengguna
-  void _showAddUserDialog(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    final nameController = TextEditingController();
-    final emailController = TextEditingController();
-    final phoneController = TextEditingController();
-    final addressController = TextEditingController();
-    final invoiceController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('Tambah Pengguna'),
-            content: SizedBox(
-              width: double.infinity,
-              child: Form(
-                key: formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: nameController,
-                        decoration: const InputDecoration(
-                          labelText: 'Nama',
-                          prefixIcon: Icon(Icons.person),
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Nama tidak boleh kosong';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      TextFormField(
-                        controller: emailController,
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                          prefixIcon: Icon(Icons.email),
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      const SizedBox(height: 16),
-                      TextFormField(
-                        controller: phoneController,
-                        decoration: const InputDecoration(
-                          labelText: 'Nomor Telepon',
-                          prefixIcon: Icon(Icons.phone),
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.phone,
-                      ),
-                      const SizedBox(height: 16),
-                      TextFormField(
-                        controller: addressController,
-                        decoration: const InputDecoration(
-                          labelText: 'Alamat',
-                          prefixIcon: Icon(Icons.home),
-                          border: OutlineInputBorder(),
-                        ),
-                        maxLines: 2,
-                        keyboardType: TextInputType.streetAddress,
-                      ),
-                      const SizedBox(height: 16),
-                      TextFormField(
-                        controller: invoiceController,
-                        decoration: const InputDecoration(
-                          labelText: 'No. Invoice',
-                          prefixIcon: Icon(Icons.receipt),
-                          border: OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.text,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Batal'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    final userProvider = Provider.of<UserProvider>(
-                      context,
-                      listen: false,
-                    );
-
-                    // Buat pengguna baru
-                    final user = User(
-                      name: nameController.text,
-                      email:
-                          emailController.text.isEmpty
-                              ? null
-                              : emailController.text,
-                      phone:
-                          phoneController.text.isEmpty
-                              ? null
-                              : phoneController.text,
-                      address:
-                          addressController.text.isEmpty
-                              ? null
-                              : addressController.text,
-                      invoice:
-                          invoiceController.text.isEmpty
-                              ? null
-                              : invoiceController.text,
-                    );
-
-                    // Simpan pengguna
-                    userProvider.saveUser(user).then((success) {
-                      if (success) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Pengguna berhasil ditambahkan'),
-                            backgroundColor: Colors.green,
-                          ),
-                        );
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              userProvider.error ??
-                                  'Gagal menambahkan pengguna',
-                            ),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
-                    });
-
-                    Navigator.pop(context);
-                  }
-                },
-                child: const Text('Simpan'),
-              ),
-            ],
-          ),
-    );
-  }
-
 }
