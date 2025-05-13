@@ -118,6 +118,26 @@ flutter build ios --release
 - Beralih tema secara otomatis mengikuti sistem
 - Kustomisasi warna utama
 
+## 📸 Screenshot Aplikasi
+
+Berikut beberapa tampilan dari aplikasi SpinWheels:
+
+<div align="center">
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+    <img src="Screenshots/home_screen.png" alt="Halaman Utama" width="250" />
+    <img src="Screenshots/spin_wheel.png" alt="Roda Undian" width="250" />
+    <img src="Screenshots/prizes_list.png" alt="Daftar Hadiah" width="250" />
+  </div>
+  
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
+    <img src="Screenshots/user_profile.png" alt="Profil Pengguna" width="250" />
+    <img src="Screenshots/history.png" alt="Riwayat Undian" width="250" />
+    <img src="Screenshots/settings.png" alt="Pengaturan" width="250" />
+  </div>
+</div>
+
+> Catatan: Screenshot di atas hanya ilustrasi. Tampilan aktual dapat berbeda tergantung pada versi aplikasi.
+
 ## 📄 Model Data
 
 ### User
