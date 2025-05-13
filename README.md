@@ -124,17 +124,17 @@ Berikut beberapa tampilan dari aplikasi SpinWheels:
 
 <div align="center">
   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-    <img src="Screenshots/splash.png" alt="Splash" width="250" />
-    <img src="Screenshots/beranda.png" alt="Halaman Utama" width="250" />
-    <img src="Screenshots/pengguna.png" alt="Pengguna" width="250" />
-    <img src="Screenshots/tambah-pengguna.png" alt="Tambah Pengguna" width="250" />
+    <img src="Screenshots/splash.png" alt="Splash" width="200" />
+    <img src="Screenshots/beranda.png" alt="Halaman Utama" width="200" />
+    <img src="Screenshots/pengguna.png" alt="Pengguna" width="200" />
+    <img src="Screenshots/tambah-pengguna.png" alt="Tambah Pengguna" width="200" />
   </div>
   
   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
-    <img src="Screenshots/hadiah.png" alt="Hadiah" width="250" />
-    <img src="Screenshots/tambah-hadiah.png" alt="Tambah Hadiah" width="250" />
-    <img src="Screenshots/statistik.png" alt="Statistik" width="250" />
-    <img src="Screenshots/settings.png" alt="Pengaturan" width="250" />
+    <img src="Screenshots/hadiah.png" alt="Hadiah" width="200" />
+    <img src="Screenshots/tambah-hadiah.png" alt="Tambah Hadiah" width="200" />
+    <img src="Screenshots/statistik.png" alt="Statistik" width="200" />
+    <img src="Screenshots/settings.png" alt="Pengaturan" width="200" />
   </div>
 </div>
 
