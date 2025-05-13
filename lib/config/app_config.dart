@@ -4,33 +4,33 @@ import 'package:flutter/material.dart';
 class AppConfig {
   // Nama aplikasi
   static const String appName = 'SpinWheels';
-  
+
   // Versi aplikasi
   static const String appVersion = '1.0.0';
-  
+
   // Skema warna utama
   static const MaterialColor primarySwatch = Colors.deepOrange;
-  
+
   // Warna utama
   static const Color primaryColor = Color(0xFFFF5722);
-  
+
   // Warna sekunder
   static const Color secondaryColor = Color(0xFF2196F3);
-  
+
   // Warna aksen
   static const Color accentColor = Color(0xFFFFC107);
-  
+
   // Durasi default untuk animasi
   static const Duration defaultAnimationDuration = Duration(milliseconds: 500);
-  
+
   // Durasi putaran roda
   static const Duration spinDuration = Duration(seconds: 5);
 
   // Nama Database
   static const String databaseName = 'spin_wheels.db';
-  
+
   // Versi Database
-  static const int databaseVersion = 1;
+  static const int databaseVersion = 2;
 }
 
 /// Konstanta untuk tabel dan kolom database
@@ -39,17 +39,19 @@ class DatabaseConstants {
   static const String usersTable = 'users';
   static const String prizesTable = 'prizes';
   static const String spinHistoryTable = 'spin_history';
-  
+
   // Kolom umum
   static const String colId = 'id';
   static const String colCreatedAt = 'created_at';
   static const String colUpdatedAt = 'updated_at';
-  
+
   // Kolom tabel users
   static const String colUserName = 'name';
   static const String colUserEmail = 'email';
   static const String colUserPhone = 'phone';
-  
+  static const String colUserAddress = 'address';
+  static const String colUserInvoice = 'invoice';
+
   // Kolom tabel prizes
   static const String colPrizeName = 'name';
   static const String colPrizeDescription = 'description';
@@ -58,7 +60,7 @@ class DatabaseConstants {
   static const String colPrizeProbability = 'probability';
   static const String colPrizeAvailableCount = 'available_count';
   static const String colPrizeImagePath = 'image_path';
-  
+
   // Kolom tabel spin_history
   static const String colSpinHistoryUserId = 'user_id';
   static const String colSpinHistoryPrizeId = 'prize_id';
@@ -87,16 +89,12 @@ class AppTheme {
     ),
     cardTheme: CardTheme(
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
     textTheme: const TextTheme(
@@ -141,31 +139,21 @@ class AppTheme {
     ),
     cardTheme: CardTheme(
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     ),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
+      displayLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       displayMedium: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
-      displaySmall: TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      ),
+      displaySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       headlineMedium: TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.bold,

@@ -43,6 +43,8 @@ class DatabaseHelper {
         ${DatabaseConstants.colUserName} TEXT NOT NULL,
         ${DatabaseConstants.colUserEmail} TEXT,
         ${DatabaseConstants.colUserPhone} TEXT,
+        ${DatabaseConstants.colUserAddress} TEXT,
+        ${DatabaseConstants.colUserInvoice} TEXT,
         ${DatabaseConstants.colCreatedAt} TEXT NOT NULL,
         ${DatabaseConstants.colUpdatedAt} TEXT NOT NULL
       )
@@ -86,9 +88,22 @@ class DatabaseHelper {
 
   /// Update database ketika versi berubah
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    // Implementasi upgrade database jika diperlukan di masa depan
+    // Implementasi upgrade database
     if (oldVersion < 2) {
-      // Misalnya tambahkan kolom baru jika upgrade ke versi 2
+      // Tambahkan kolom address dan invoice ke tabel users jika upgrade ke versi 2
+      try {
+        await db.execute('''
+          ALTER TABLE ${DatabaseConstants.usersTable}
+          ADD COLUMN ${DatabaseConstants.colUserAddress} TEXT;
+        ''');
+
+        await db.execute('''
+          ALTER TABLE ${DatabaseConstants.usersTable}
+          ADD COLUMN ${DatabaseConstants.colUserInvoice} TEXT;
+        ''');
+      } catch (e) {
+        print('Error saat upgrade database: $e');
+      }
     }
   }
 
@@ -106,13 +121,26 @@ class DatabaseHelper {
 
   /// Update record di database
   Future<int> update(
-      String table, Map<String, dynamic> values, String whereClause, List<dynamic> whereArgs) async {
+    String table,
+    Map<String, dynamic> values,
+    String whereClause,
+    List<dynamic> whereArgs,
+  ) async {
     final db = await database;
-    return await db.update(table, values, where: whereClause, whereArgs: whereArgs);
+    return await db.update(
+      table,
+      values,
+      where: whereClause,
+      whereArgs: whereArgs,
+    );
   }
 
   /// Delete record dari database
-  Future<int> delete(String table, String whereClause, List<dynamic> whereArgs) async {
+  Future<int> delete(
+    String table,
+    String whereClause,
+    List<dynamic> whereArgs,
+  ) async {
     final db = await database;
     return await db.delete(table, where: whereClause, whereArgs: whereArgs);
   }
@@ -140,7 +168,10 @@ class DatabaseHelper {
   }
 
   /// Raw query untuk query kompleks
-  Future<List<Map<String, dynamic>>> rawQuery(String sql, [List<dynamic>? arguments]) async {
+  Future<List<Map<String, dynamic>>> rawQuery(
+    String sql, [
+    List<dynamic>? arguments,
+  ]) async {
     final db = await database;
     return await db.rawQuery(sql, arguments);
   }

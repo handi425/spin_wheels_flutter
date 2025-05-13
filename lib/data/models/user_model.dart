@@ -6,6 +6,8 @@ class User {
   final String name;
   final String? email;
   final String? phone;
+  final String? address;
+  final String? invoice;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -14,10 +16,12 @@ class User {
     required this.name,
     this.email,
     this.phone,
+    this.address,
+    this.invoice,
     DateTime? createdAt,
     DateTime? updatedAt,
-  })  : createdAt = createdAt ?? DateTime.now(),
-        updatedAt = updatedAt ?? DateTime.now();
+  }) : createdAt = createdAt ?? DateTime.now(),
+       updatedAt = updatedAt ?? DateTime.now();
 
   /// Membuat User dari Map (dari database)
   factory User.fromMap(Map<String, dynamic> map) {
@@ -26,6 +30,8 @@ class User {
       name: map[DatabaseConstants.colUserName],
       email: map[DatabaseConstants.colUserEmail],
       phone: map[DatabaseConstants.colUserPhone],
+      address: map[DatabaseConstants.colUserAddress],
+      invoice: map[DatabaseConstants.colUserInvoice],
       createdAt: DateTime.parse(map[DatabaseConstants.colCreatedAt]),
       updatedAt: DateTime.parse(map[DatabaseConstants.colUpdatedAt]),
     );
@@ -37,6 +43,8 @@ class User {
       DatabaseConstants.colUserName: name,
       DatabaseConstants.colUserEmail: email,
       DatabaseConstants.colUserPhone: phone,
+      DatabaseConstants.colUserAddress: address,
+      DatabaseConstants.colUserInvoice: invoice,
       DatabaseConstants.colCreatedAt: createdAt.toIso8601String(),
       DatabaseConstants.colUpdatedAt: updatedAt.toIso8601String(),
     };
@@ -54,6 +62,8 @@ class User {
     String? name,
     String? email,
     String? phone,
+    String? address,
+    String? invoice,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -62,6 +72,8 @@ class User {
       name: name ?? this.name,
       email: email ?? this.email,
       phone: phone ?? this.phone,
+      address: address ?? this.address,
+      invoice: invoice ?? this.invoice,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? DateTime.now(),
     );
@@ -69,6 +81,6 @@ class User {
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phone: $phone)';
+    return 'User(id: $id, name: $name, email: $email, phone: $phone, address: $address, invoice: $invoice)';
   }
 }
